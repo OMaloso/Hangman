@@ -20,11 +20,14 @@ private:
 	int currentLanguage{ -1 };
 
 	int userInput{ 0 };
-	bool hasWonGame{ false };
+	bool hasFinishedGame{ false };
 	std::string currentWord{ "" };
 
-	void LoadWordsFromFile();
-	void DisplayAllLanguageInfo();
+	int numberOfGuesses{ 7 };
 
+	void LoadWordsFromFile();
+	void SelectLanguage();
+	void DisplayAllLanguageInfo();
+	void Reset();
 };
 
