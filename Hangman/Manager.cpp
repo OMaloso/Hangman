@@ -15,9 +15,9 @@ void Manager::RunHangman()
 	while (isGameInPlay)
 	{
 		hasFinishedGame = false;
-		system("cls");
 		while (difficulty == None)
 		{
+			system("cls");
 			std::cout << "Hangman" << std::endl;
 			std::cout << std::endl;
 
@@ -25,6 +25,8 @@ void Manager::RunHangman()
 			std::cout << "1: Easy" << std::endl;
 			std::cout << "2: Medium" << std::endl;
 			std::cout << "3: Hard" << std::endl;
+			std::cout << std::endl;
+			std::cout << "0: Quit" << std::endl;
 
 			std::cin >> userInput;
 			std::cout << std::endl;
@@ -41,14 +43,26 @@ void Manager::RunHangman()
 			{
 				difficulty = Hard;
 			}
+			else if (userInput == 0)
+			{
+				exit(0);
+			}
+			else if (std::cin.fail())
+			{
+				std::cout << "Incorrect option. Please input value between 1 and 3." << std::endl;
+				std::cin.clear(); // Clear error flag
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+				EnterToContinue(false);
+			}
 			else
 			{
 				std::cout << "Incorrect option. Please input value between 1 and 3." << std::endl;
+				EnterToContinue(false);
 			}
 		}
 
-		std::cout << currentLanguage << std::endl;
-		std::cout << Utility::DifficultyEnumToString(difficulty) << std::endl;
+		//std::cout << currentLanguage << std::endl;
+		//std::cout << Utility::DifficultyEnumToString(difficulty) << std::endl;
 
 		// Seed random number
 		std::random_device rd;
@@ -282,17 +296,14 @@ void Manager::RunHangman()
 				}
 			}
 
-			std::cout << std::endl;
-			std::cout << "Press Enter to continue...";
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
-			std::cin.get();
+			EnterToContinue(true);
 		}
 	}
 }
 
 void Manager::LoadWordsFromFile()
 {
-	// Load languages file
+	// Load file
 	std::ifstream inputFile("Data/Languages.txt");
 	std::string stringLine;
 
@@ -327,13 +338,21 @@ void Manager::SelectLanguage()
 		{
 			std::cout << i + 1 << ": " << languageNames[i] << std::endl;
 		}
+		std::cout << std::endl;
+		std::cout << "0: Quit" << std::endl;
 
 		std::cin >> userInput;
 		std::cout << std::endl;
 
-		if (userInput < 1 || userInput > languageNames.size() + 1)
+		if (userInput == 0)
+		{
+			exit(0);
+		}
+		else if (userInput < 1 || userInput > languageNames.size() + 1 || std::cin.fail())
 		{
 			std::cout << "Incorrect option. Please input value between 1 and " << languageNames.size() << std::endl;
+			std::cin.clear(); // Clear error flag
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
 		}
 		else
 		{
@@ -405,4 +424,15 @@ void Manager::DrawHangman7Guesses()
 
 	std::cout << std::endl;
 	std::cout << std::endl;
+}
+
+void Manager::EnterToContinue(bool _clearInput)
+{
+	std::cout << std::endl;
+	std::cout << "Press Enter to continue...";
+	if (_clearInput)
+	{
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
+		std::cin.get();
+	}
 }

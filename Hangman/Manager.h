@@ -31,5 +31,6 @@ private:
 	void DisplayAllLanguageInfo();
 	void Reset();
 	void DrawHangman7Guesses();
+	void EnterToContinue(bool _clearInput);
 };
 

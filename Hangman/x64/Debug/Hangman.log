@@ -1,5 +1,5 @@
 ﻿  Manager.cpp
-D:\CodingProjects\C++Projects\Hangman\Hangman\Manager.cpp(65,76): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\CodingProjects\C++Projects\Hangman\Hangman\Manager.cpp(86,78): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\CodingProjects\C++Projects\Hangman\Hangman\Manager.cpp(107,76): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\CodingProjects\C++Projects\Hangman\Hangman\Manager.cpp(79,76): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\CodingProjects\C++Projects\Hangman\Hangman\Manager.cpp(100,78): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\CodingProjects\C++Projects\Hangman\Hangman\Manager.cpp(121,76): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Hangman.vcxproj -> D:\CodingProjects\C++Projects\Hangman\x64\Debug\Hangman.exe

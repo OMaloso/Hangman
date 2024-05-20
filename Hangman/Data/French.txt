@@ -1,18 +1,18 @@
 ===Easy===
-Bonjour
-Salut
-Bonsoir
-Oui
+bonjour
+salut
+bonsoir
+oui
 
 ===Medium===
-Rendez-vous
-Catastrophe
-Fantastique
-Tranquille
+rendez-vous
+catastrophe
+fantastique
+tranquille
 
 ===Hard===
-Anticonstitutionnellement
-Inextricable
-Ubuesque
-Paroxysme
-Insouciance
+anticonstitutionnellement
+inextricable
+ubuesque
+paroxysme
+insouciance

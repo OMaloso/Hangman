@@ -8,7 +8,7 @@ monkey
 horse
 giraffe
 goodbye
-thank you
+thanks
 please
 friend
 house
