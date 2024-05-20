@@ -1,0 +1,12 @@
+﻿  Language.cpp
+  main.cpp
+  Manager.cpp
+D:\CodingProjects\C++Projects\Hangman\Hangman\Manager.cpp(79,76): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\CodingProjects\C++Projects\Hangman\Hangman\Manager.cpp(100,78): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\CodingProjects\C++Projects\Hangman\Hangman\Manager.cpp(121,76): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Utility.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 393 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Hangman.vcxproj -> D:\CodingProjects\C++Projects\Hangman\x64\Release\Hangman.exe
