@@ -10,6 +10,8 @@ void Manager::RunHangman()
 
 	SelectLanguage();
 
+	numberOfGuesses = maxNumberOfGuesses;
+
 	while (isGameInPlay)
 	{
 		hasFinishedGame = false;
@@ -64,7 +66,7 @@ void Manager::RunHangman()
 
 				if (randomNumberSize > 0)
 				{
-					std::uniform_int_distribution<> dis(0, randomNumberSize - 1);
+					std::uniform_int_distribution<> dis(1, randomNumberSize - 1);
 
 					// Generate a random number
 					randomNumber = dis(gen);
@@ -85,7 +87,7 @@ void Manager::RunHangman()
 
 				if (randomNumberSize > 0)
 				{
-					std::uniform_int_distribution<> dis(0, randomNumberSize - 1);
+					std::uniform_int_distribution<> dis(1, randomNumberSize - 1);
 
 					// Generate a random number
 					randomNumber = dis(gen);
@@ -106,7 +108,7 @@ void Manager::RunHangman()
 
 				if (randomNumberSize > 0)
 				{
-					std::uniform_int_distribution<> dis(0, randomNumberSize - 1);
+					std::uniform_int_distribution<> dis(1, randomNumberSize - 1);
 
 					// Generate a random number
 					randomNumber = dis(gen);
@@ -151,21 +153,68 @@ void Manager::RunHangman()
 			system("cls");
 			std::cout << std::endl;
 
+			DrawHangman7Guesses();
+
+			// Check for a loss
+			if (numberOfGuesses <= 0)
+			{
+				std::cout << "You have run out of guesses. Game Over" << std::endl;
+				std::cout << std::endl;
+				std::cout << "The correct answer was: " << currentWord << std::endl;
+				Reset();
+				hasFinishedGame = true;
+
+				std::cout << std::endl;
+				std::cout << "Press Enter to continue...";
+				std::cin.get();
+
+				continue;
+			}
+
+			// Show letters (or _ if unguessed)
 			for (int i = 0; i < wordCharacters.size(); i++)
 			{
-				bool haveFoundWord{ false };
+				bool haveFoundLetter{ false };
 				for (int j = 0; j < guessedCharacters.size(); j++)
 				{
 					if (guessedCharacters[j] == wordCharacters[i])
 					{
 						std::cout << wordCharacters[i] << " ";
-						haveFoundWord = true;
+						haveFoundLetter = true;
 						break;
 					}	
 				}
-				if (!haveFoundWord)
+				if (!haveFoundLetter)
 					std::cout << "_ ";
 			}
+
+			// Check for a win
+			int numberOfCharacters = 0;
+			for (int i = 0; i < wordCharacters.size(); i++)
+			{
+				for (int j = 0; j < guessedCharacters.size(); j++)
+				{
+					if (guessedCharacters[j] == wordCharacters[i])
+					{
+						numberOfCharacters++;
+						break;
+					}
+				}
+			}
+			if (numberOfCharacters >= wordCharacters.size())
+			{
+				std::cout << std::endl;
+				std::cout << std::endl;
+				std::cout << "You Win!" << std::endl;
+				Reset();
+
+				std::cout << std::endl;
+				std::cout << "Press Enter to continue...";
+				std::cin.get();
+
+				continue;
+			}
+
 			std::cout << std::endl;
 			std::cout << std::endl;
 			std::cout << "Guessed letters: ";
@@ -175,6 +224,7 @@ void Manager::RunHangman()
 			}
 			std::cout << std::endl;
 			std::cout << "You have " << numberOfGuesses << " guesses left." << std::endl;
+			std::cout << std::endl;
 
 			std::string guessedLetter;
 			std::cout << "Guess a letter: ";
@@ -231,12 +281,7 @@ void Manager::RunHangman()
 					}
 				}
 			}
-			if (numberOfGuesses <= 0)
-			{
-				std::cout << "You have run out of guesses. Game Over" << std::endl;
-				std::cout << "The correct answer was: " << currentWord  << std::endl;
-				Reset();
-			}
+
 			std::cout << std::endl;
 			std::cout << "Press Enter to continue...";
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
@@ -277,8 +322,6 @@ void Manager::SelectLanguage()
 {
 	while (currentLanguage == -1)
 	{
-		std::cout << "Hangman" << std::endl;
-		std::cout << std::endl;
 		std::cout << "Choose a language:" << std::endl;
 		for (int i = 0; i < languageNames.size(); i++)
 		{
@@ -313,5 +356,53 @@ void Manager::Reset()
 	userInput = 0;
 	hasFinishedGame = true;
 	currentWord = "";
-	numberOfGuesses = 7;
+	numberOfGuesses = maxNumberOfGuesses;
+}
+
+void Manager::DrawHangman7Guesses()
+{
+	if (maxNumberOfGuesses != 7)
+		return;
+
+	// Draw hangman
+	std::cout << "|";
+	if (numberOfGuesses <= 6)
+		std::cout << "-----" << std::endl;
+	else
+		std::cout << std::endl;
+
+	std::cout << "|";
+	if (numberOfGuesses <= 5)
+		std::cout << "    o" << std::endl;
+	else
+		std::cout << std::endl;
+
+	std::cout << "|";
+	if (numberOfGuesses == 4)
+		std::cout << "    |" << std::endl;
+	else if (numberOfGuesses == 3)
+		std::cout << "   /|" << std::endl;
+	else if (numberOfGuesses <= 2)
+		std::cout << "   /|\\" << std::endl;
+	else
+		std::cout << std::endl; 
+	
+	std::cout << "|";
+	if (numberOfGuesses <= 4)
+		std::cout << "    |" << std::endl; 
+	else
+		std::cout << std::endl;
+	
+	std::cout << "|";
+	if (numberOfGuesses == 1)
+		std::cout << "   /" << std::endl;
+	else if (numberOfGuesses <= 0)
+		std::cout << "   / \\" << std::endl;
+	else
+		std::cout << std::endl;
+
+	std::cout << "|" << std::endl;
+
+	std::cout << std::endl;
+	std::cout << std::endl;
 }

@@ -23,11 +23,13 @@ private:
 	bool hasFinishedGame{ false };
 	std::string currentWord{ "" };
 
-	int numberOfGuesses{ 7 };
+	int maxNumberOfGuesses{ 7 };
+	int numberOfGuesses{};
 
 	void LoadWordsFromFile();
 	void SelectLanguage();
 	void DisplayAllLanguageInfo();
 	void Reset();
+	void DrawHangman7Guesses();
 };
 
